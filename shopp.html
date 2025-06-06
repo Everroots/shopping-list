@@ -1,49 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Bevásárlólista</title>
-<style>
-  body { font-family: Arial, sans-serif; max-width: 480px; margin: auto; padding: 1rem; }
-  h1 { text-align: center; }
-  ul { list-style: none; padding-left: 0; }
-  li { padding: 10px; border-bottom: 1px solid #ccc; }
-  label { display: flex; align-items: center; cursor: pointer; }
-  input[type="checkbox"] { margin-right: 10px; transform: scale(1.3); }
-  .checked { text-decoration: line-through; color: grey; }
-</style>
-</head>
-<body>
-<h1>Bevásárlólista</h1>
-<ul id="shopping-list">
-  <li><label><input type="checkbox" data-id="1" /> Alma</label></li>
-  <li><label><input type="checkbox" data-id="2" /> Banán</label></li>
-  <li><label><input type="checkbox" data-id="3" /> Tej</label></li>
-  <li><label><input type="checkbox" data-id="4" /> Liszt</label></li>
-  <li><label><input type="checkbox" data-id="5" /> Tojás</label></li>
-</ul>
-
-<script>
-  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-  checkboxes.forEach(cb => {
-    // Betöltjük az állapotot localStorage-ból
-    const checked = localStorage.getItem('item-' + cb.dataset.id) === 'true';
-    cb.checked = checked;
-    if (checked) {
-      cb.parentElement.classList.add('checked');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paneer Butter Masala Shopping List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background-color: #f8f8f8;
     }
 
-    // Változáskor elmentjük az állapotot és megjelenítjük áthúzva
-    cb.addEventListener('change', () => {
-      localStorage.setItem('item-' + cb.dataset.id, cb.checked);
-      if (cb.checked) {
-        cb.parentElement.classList.add('checked');
-      } else {
-        cb.parentElement.classList.remove('checked');
-      }
+    h1 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.5rem;
+      transition: background-color 0.3s;
+    }
+
+    input[type="checkbox"] {
+      transform: scale(1.2);
+      cursor: pointer;
+    }
+
+    li.checked {
+      text-decoration: line-through;
+      color: #999;
+      background-color: #eee;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Paneer Butter Masala</h1>
+  <ul id="shopping-list">
+    <li><span>1 cup plain yogurt</span> <input type="checkbox" /></li>
+    <li><span>2 garlic cloves</span> <input type="checkbox" /></li>
+    <li><span>1 tbsp ginger paste</span> <input type="checkbox" /></li>
+    <li><span>1 tsp garam masala</span> <input type="checkbox" /></li>
+    <!-- Add more items as needed -->
+  </ul>
+
+  <script>
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(box => {
+      box.addEventListener('change', () => {
+        box.closest('li').classList.toggle('checked', box.checked);
+      });
     });
-  });
-</script>
+  </script>
+
 </body>
 </html>
